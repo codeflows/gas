@@ -8,6 +8,13 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
+type item struct {
+	id       string
+	category string
+	title    string
+	url      string
+}
+
 func ScrapeMuusikoidenNet() {
 	doc, err := goquery.NewDocument("https://muusikoiden.net/tori/?category=0")
 	if err != nil {
@@ -16,14 +23,15 @@ func ScrapeMuusikoidenNet() {
 
 	idFromURL, _ := regexp.Compile("/(\\d+)$")
 
-	doc.Find("td.tori_title").Each(func(i int, title *goquery.Selection) {
+	doc.Find("td.tori_title").Each(func(i int, titleContainer *goquery.Selection) {
 		// TODO "Myydään" ääkköset are mangled
-		category := title.Find("b").Text()
-		link := title.Find("a")
-		name := link.Text()
+		category := titleContainer.Find("b").Text()
+		link := titleContainer.Find("a")
+		title := link.Text()
 		url, _ := link.Attr("href")
 		id := idFromURL.FindStringSubmatch(url)[1]
-		fmt.Printf("%s %s %s %s\n", category, name, url, id)
+		item := item{id, category, title, url}
+		fmt.Printf("%s\n", item)
 	})
 }
 
