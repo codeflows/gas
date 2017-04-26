@@ -23,7 +23,11 @@ func ScrapeMuusikoidenNet() {
 
 	idFromURL, _ := regexp.Compile("/(\\d+)$")
 
-	doc.Find("td.tori_title").Each(func(i int, titleContainer *goquery.Selection) {
+	elements := doc.Find("td.tori_title")
+
+	items := make([]item, elements.Length())
+
+	elements.Each(func(i int, titleContainer *goquery.Selection) {
 		// TODO "Myydään" ääkköset are mangled
 		category := titleContainer.Find("b").Text()
 		link := titleContainer.Find("a")
@@ -31,8 +35,10 @@ func ScrapeMuusikoidenNet() {
 		url, _ := link.Attr("href")
 		id := idFromURL.FindStringSubmatch(url)[1]
 		item := item{id, category, title, url}
-		fmt.Printf("%s\n", item)
+		items[i] = item
 	})
+
+	fmt.Printf("%s\n", items)
 }
 
 func main() {
