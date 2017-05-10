@@ -1,14 +1,14 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"regexp"
 
 	"github.com/PuerkitoBio/goquery"
 )
 
-type item struct {
+// Ad is an advertisement in muusikoiden.net
+type Ad struct {
 	id          string
 	category    string
 	title       string
@@ -19,7 +19,8 @@ type item struct {
 
 var idFromURL, _ = regexp.Compile("/(\\d+)$")
 
-func ScrapeMuusikoidenNet() {
+// ScrapeAds returns a list of ads from muusikoiden.net
+func ScrapeAds() []Ad {
 	doc, err := goquery.NewDocument("https://muusikoiden.net/tori/?category=0")
 	if err != nil {
 		log.Fatal(err)
@@ -27,7 +28,7 @@ func ScrapeMuusikoidenNet() {
 
 	elements := doc.Find("td.tori_title")
 
-	items := make([]item, elements.Length())
+	ads := make([]Ad, elements.Length())
 
 	elements.Each(func(i int, titleContainer *goquery.Selection) {
 		category := titleContainer.Find("b").Text()
@@ -40,15 +41,9 @@ func ScrapeMuusikoidenNet() {
 		description := descriptionContainer.Text()
 		price := descriptionContainer.SiblingsFiltered("p").Text()
 
-		item := item{id, category, title, url, description, price}
-		items[i] = item
+		ad := Ad{id, category, title, url, description, price}
+		ads[i] = ad
 	})
 
-	for _, item := range items {
-		fmt.Printf("%s %s\n", item.title, item.price)
-	}
-}
-
-func main() {
-	ScrapeMuusikoidenNet()
+	return ads
 }
