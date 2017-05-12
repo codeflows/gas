@@ -1,7 +1,7 @@
 # gas
 
 ```bash
-$ go run gas.go
+$ go run *.go
 Gibson J-45 ViINTAGE 2016 Hinta: 2450 €
 Camco pedaali Hinta: 50 €
 Proco Rat original, Tämän viikon tarjous! Hinta: 160 €
