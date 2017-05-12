@@ -7,16 +7,6 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-// Ad is an advertisement in muusikoiden.net
-type Ad struct {
-	id          string
-	category    string
-	title       string
-	url         string
-	description string
-	price       string
-}
-
 var idFromURL, _ = regexp.Compile("/(\\d+)$")
 
 // ScrapeAds returns a list of ads from muusikoiden.net
@@ -34,8 +24,9 @@ func ScrapeAds() []Ad {
 		category := titleContainer.Find("b").Text()
 		link := titleContainer.Find("a")
 		title := link.Text()
-		url, _ := link.Attr("href")
-		id := idFromURL.FindStringSubmatch(url)[1]
+		path, _ := link.Attr("href")
+		url := "https://muusikoiden.net" + path
+		id := idFromURL.FindStringSubmatch(path)[1]
 
 		descriptionContainer := titleContainer.Parent().Siblings().Find("font.msg")
 		description := descriptionContainer.Text()
