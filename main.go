@@ -30,7 +30,11 @@ func main() {
 	// Ads seem to be ordered in non-id order? Probably publish date.
 	fmt.Printf("%d new ads since last run\n", len(newAds))
 
-	for _, item := range ads {
-		fmt.Printf("%s %s %s\n", item.id, item.title, item.price)
+	for _, ad := range ads {
+		fmt.Printf("%s %s %s\n", ad.id, ad.title, ad.price)
+		slackError := SendAdToSlack(ad)
+		if slackError != nil {
+			fmt.Printf("Sending to Slack failed: %s\n", slackError)
+		}
 	}
 }
