@@ -1,1 +1,1 @@
-worker: go run *.go
+worker: gas
