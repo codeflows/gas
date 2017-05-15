@@ -6,7 +6,7 @@ and posts them to Slack. Keeps track of already seen ads in a Postgres JSONB col
 ## Usage
 
 ```bash
-SLACK_WEBHOOK_URL="https://hooks.slack.com/..." go run *.go
+SLACK_WEBHOOK_URL="https://hooks.slack.com/..." DATABASE_URL="postgres://..." go run *.go
 ```
 
 ## Gotchas
