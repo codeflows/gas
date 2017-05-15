@@ -28,6 +28,12 @@ func ReadSeenAdIds() (SeenAds, error) {
 	return ids, nil
 }
 
+// WriteSeenAdIds writes the list of ids to disk
 func WriteSeenAdIds(seenAds SeenAds) error {
-	return nil
+	json, jsonError := json.Marshal(seenAds)
+	if jsonError != nil {
+		return jsonError
+	}
+
+	return ioutil.WriteFile(filename, json, 0644)
 }
