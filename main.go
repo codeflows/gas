@@ -32,6 +32,6 @@ func main() {
 
 	updateError := WriteSeenAdIds(seenAdIds)
 	if updateError != nil {
-		fmt.Printf("Writing updated ad id list to file failed: %s\n", updateError)
+		fmt.Printf("Writing updated ad id list to database failed: %s\n", updateError)
 	}
 }
