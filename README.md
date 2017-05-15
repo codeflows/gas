@@ -11,5 +11,6 @@ SLACK_WEBHOOK_URL="https://hooks.slack.com/..." DATABASE_URL="postgres://..." go
 
 ## Gotchas
 
-Only loads the first page of results, so if the script isn't run often enough it will miss new ads.
-Database code is fast and loose.
+- Only loads the first page of results (15 ads), so if the script isn't run often enough it will miss new ads.
+- Database code is fast and loose.
+- This is my first Go program
