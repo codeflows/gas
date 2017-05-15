@@ -10,7 +10,7 @@ import (
 
 // SendAdToSlack formats and sends and ad to Slack
 func SendAdToSlack(ad Ad) (err error) {
-	text := fmt.Sprintf("<%s|%s> %s", ad.url, ad.title, ad.price)
+	text := fmt.Sprintf("%s: <%s|%s> %s", ad.category, ad.url, ad.title, ad.price)
 
 	payload := map[string]string{"text": text}
 	jsonPayload, jsonError := json.Marshal(payload)
