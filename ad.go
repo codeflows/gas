@@ -9,3 +9,14 @@ type Ad struct {
 	description string
 	price       string
 }
+
+// Filter returns the array filtered by the predicate
+func Filter(vs []Ad, predicate func(Ad) bool) []Ad {
+	var filtered []Ad
+	for _, v := range vs {
+		if predicate(v) {
+			filtered = append(filtered, v)
+		}
+	}
+	return filtered
+}
