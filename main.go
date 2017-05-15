@@ -10,10 +10,10 @@ func main() {
 	} else if seenAdIds == nil {
 		seenAdIds = make(SeenAds)
 	}
-	fmt.Printf("Read a list of %d already seen ad ids\n", len(seenAdIds))
+	fmt.Printf("We've previously seen %d different ads\n", len(seenAdIds))
 
 	ads := ScrapeAds()
-	fmt.Printf("Read %d ads from Muusikoiden.net\n", len(ads))
+	fmt.Printf("Read %d latest ads from Muusikoiden.net\n", len(ads))
 
 	newAds := Filter(ads, func(ad Ad) bool {
 		alreadySeen := seenAdIds[ad.id]
