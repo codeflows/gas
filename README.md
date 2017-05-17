@@ -8,9 +8,3 @@ and posts them to Slack. Keeps track of already seen ads in a Postgres JSONB col
 ```bash
 SLACK_WEBHOOK_URL="https://hooks.slack.com/..." DATABASE_URL="postgres://..." go run *.go
 ```
-
-## Gotchas
-
-- Only loads the first page of results (15 ads), so if the script isn't run often enough it will miss new ads.
-- Database code is fast and loose.
-- This is my first Go program
