@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"regexp"
+	"strings"
 
 	"github.com/PuerkitoBio/goquery"
 )
@@ -21,7 +22,7 @@ func ScrapeAds() []Ad {
 	ads := make([]Ad, elements.Length())
 
 	elements.Each(func(i int, titleContainer *goquery.Selection) {
-		category := titleContainer.Find("b").Text()
+		category := strings.Replace(titleContainer.Find("b").Text(), ":", "", -1)
 		link := titleContainer.Find("a")
 		title := link.Text()
 		path, _ := link.Attr("href")
