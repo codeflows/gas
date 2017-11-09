@@ -3,6 +3,8 @@ package main
 import "fmt"
 
 func main() {
+	fmt.Printf("Starting to read already seen ad ids")
+
 	seenAdIds, readError := ReadSeenAdIds()
 	if readError != nil {
 		fmt.Printf("Couldn't read already seen ad ids, falling back to an empty list. Error: %s\n", readError)
